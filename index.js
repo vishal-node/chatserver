@@ -5,7 +5,8 @@ const cors = require('cors');
 
 const {addUser, removeUser, getUser, getUsersInRoom,} = require('./user');  
 
-PORT = process.env.POST || 3001;
+const PORT = process.env.PORT || 3001;
+
 
 const router = require('./router');
 const app = express();
@@ -51,4 +52,6 @@ io.on('connection', (socket) => {
 app.use(router);
 app.use(cors());
 
-server.listen(PORT, () => console.log(`Server is start running on port ${PORT}`));
+server.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
