@@ -2,6 +2,7 @@ const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
 const cors = require('cors');
+const moment = require('moment'); 
 
 const {addUser, removeUser, getUser, getUsersInRoom,} = require('./user');  
 
@@ -32,8 +33,8 @@ io.on('connection', (socket) => {
       
       socket.on('sendMessage', (message, callback) => {
         const user = getUser(socket.id);
-    
-        io.to(user.room).emit('message', { user: user.name, text: message, time: '20-06-30' });
+        let currentTime = moment().format();
+        io.to(user.room).emit('message', { user: user.name, text: message, time: currentTime });
     
         callback();
       });
